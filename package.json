@@ -1,0 +1,83 @@
+{
+	"name": "konashevich-pdf-viewer",
+	"displayName": "PDF Viewer (Page Scroll)",
+	"description": "PDF.js viewer forked for Project Acacia with page-by-page scrolling enabled.",
+	"version": "1.0.0",
+	"publisher": "konashevich",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/konashevich/Public-VS-Private"
+	},
+	"engines": {
+		"vscode": "^1.96.0"
+	},
+	"icon": "icon.png",
+	"license": "Apache-2.0",
+	"keywords": [
+		"pdf",
+		"viewer"
+	],
+	"categories": [
+		"Visualization",
+		"Other"
+	],
+	"main": "./dist/extension.js",
+	"activationEvents": [
+		"onCustomEditor:konashevich.pdf.view"
+	],
+	"contributes": {
+		"customEditors": [
+			{
+				"viewType": "konashevich.pdf.view",
+				"displayName": "Acacia PDF View",
+				"selector": [
+					{
+						"filenamePattern": "*.pdf"
+					}
+				]
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "Acacia PDF Viewer",
+			"properties": {
+				"acaciaPdf.scrollMode": {
+					"type": "string",
+					"default": "page",
+					"enum": [
+						"vertical",
+						"horizontal",
+						"wrapped",
+						"page"
+					],
+					"enumDescriptions": [
+						"Continuous vertical scrolling",
+						"Continuous horizontal scrolling",
+						"Wrapped scrolling",
+						"Page-by-page scrolling (discrete pages)"
+					],
+					"description": "Default scroll mode for PDF viewer"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"build": "webpack",
+		"watch": "webpack --watch",
+		"package": "webpack --mode production --devtool hidden-source-map",
+		"vsix": "npx -y @vscode/vsce package",
+		"test-compile": "npm run compile",
+		"test-watch": "npm run watch"
+	},
+	"devDependencies": {
+		"@types/node": "22.x",
+		"@types/vscode": "1.96.0",
+		"ts-loader": "9.5.2",
+		"typescript": "5.7.3",
+		"webpack": "5.97.1",
+		"webpack-cli": "6.0.1"
+	},
+	"__metadata": {
+		"note": "Local fork packaged for Project Acacia"
+	}
+}
