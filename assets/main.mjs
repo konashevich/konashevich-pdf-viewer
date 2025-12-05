@@ -45,18 +45,41 @@ PDFViewerApplicationOptions.set("scrollModeOnLoad", scrollModeValue);
 void (async () => {
   await window.PDFViewerApplication.initializedPromise;
   await window.PDFViewerApplication.open(config);
-  
-  // Explicitly set scroll mode after document loads
-  await window.PDFViewerApplication.pdfViewer.pagesPromise;
-  if (scrollModeValue !== undefined && scrollModeValue >= 0) {
-    window.PDFViewerApplication.pdfViewer.scrollMode = scrollModeValue;
-  }
-  
   const [,hash] = config.url.split("#")
   if(hash){
     PDFViewerApplication.pdfLinkService.setHash(decodeURIComponent(hash))
   }
 })();
+
+// Handle wheel scrolling for Page mode
+window.addEventListener("wheel", (e) => {
+  const app = window.PDFViewerApplication;
+  if (!app || !app.pdfViewer) return;
+  
+  const viewer = app.pdfViewer;
+  // Only handle if in Page mode (3)
+  if (viewer.scrollMode !== 3) return;
+
+  const container = viewer.container;
+  if (!container) return;
+
+  // Check if we are at the boundaries
+  // Use a small epsilon for float comparison if needed, but DOM properties are usually integers or close enough
+  const isAtBottom = container.scrollTop + container.clientHeight >= container.scrollHeight - 1;
+  const isAtTop = container.scrollTop <= 1;
+
+  if (e.deltaY > 0) {
+    // Scrolling down
+    if (isAtBottom) {
+      viewer.nextPage();
+    }
+  } else if (e.deltaY < 0) {
+    // Scrolling up
+    if (isAtTop) {
+      viewer.previousPage();
+    }
+  }
+}, { passive: true });
 
 window.addEventListener("message", async (event) => {
   await window.PDFViewerApplication.initializedPromise;
