@@ -1,0 +1,41 @@
+# Exclude source files and development tools
+.git/**
+.github/**
+.gitmodules
+.gitignore
+
+# Development tools
+tools/**
+patches/**
+node_modules/**
+
+# Build artifacts not needed in package
+*.vsix
+pdfjs_version.txt
+
+# TypeScript source (we only need compiled JS)
+src/**
+*.ts
+tsconfig.json
+webpack.config.js
+
+# Development files
+.vscode/**
+.eslintrc*
+.prettierrc*
+
+# Documentation (keep README and CHANGELOG)
+# README.md - keep
+# CHANGELOG.md - keep
+
+# Test files
+test/**
+*.test.js
+*.spec.js
+
+# Source maps (optional - remove if you don't need debugging)
+# *.map
+
+# Backup files
+*.backup
+dist/*.backup

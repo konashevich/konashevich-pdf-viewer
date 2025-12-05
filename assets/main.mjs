@@ -45,6 +45,13 @@ PDFViewerApplicationOptions.set("scrollModeOnLoad", scrollModeValue);
 void (async () => {
   await window.PDFViewerApplication.initializedPromise;
   await window.PDFViewerApplication.open(config);
+  
+  // Explicitly set scroll mode after document loads
+  await window.PDFViewerApplication.pdfViewer.pagesPromise;
+  if (scrollModeValue !== undefined && scrollModeValue >= 0) {
+    window.PDFViewerApplication.pdfViewer.scrollMode = scrollModeValue;
+  }
+  
   const [,hash] = config.url.split("#")
   if(hash){
     PDFViewerApplication.pdfLinkService.setHash(decodeURIComponent(hash))
