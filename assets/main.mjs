@@ -34,12 +34,57 @@ const ScrollMode = {
   page: 3
 };
 
+const SpreadMode = {
+  none: 0,
+  odd: 1,
+  even: 2
+};
+
+function addDualPageModeButton() {
+  const container = document.getElementById("secondaryToolbarButtonContainer");
+  const spreadModeButtons = document.getElementById("spreadModeButtons");
+
+  if (!container || !spreadModeButtons || document.getElementById("dualPageMode")) {
+    return;
+  }
+
+  const button = document.createElement("button");
+  button.id = "dualPageMode";
+  button.className = "toolbarButton labeled";
+  button.type = "button";
+  button.title = "Open in Dual Page Mode";
+  button.tabIndex = 0;
+
+  const label = document.createElement("span");
+  label.textContent = "Dual Page Mode";
+  button.append(label);
+
+  button.addEventListener("click", () => {
+    const app = window.PDFViewerApplication;
+    const viewer = app?.pdfViewer;
+
+    if (!viewer) {
+      return;
+    }
+
+    viewer.scrollMode = ScrollMode.page;
+    viewer.spreadMode = SpreadMode.odd;
+    viewer.currentScaleValue = "page-fit";
+    app.secondaryToolbar?.close();
+  });
+
+  container.insertBefore(button, spreadModeButtons);
+}
+
 // Get scroll mode from config or default to page-by-page scrolling
 const scrollModeSetting = config.scrollMode || 'page';
 const scrollModeValue = ScrollMode[scrollModeSetting] ?? ScrollMode.page;
 
+addDualPageModeButton();
+
 PDFViewerApplicationOptions.set("defaultUrl", "");
 PDFViewerApplicationOptions.set("disablePreferences", true);
+PDFViewerApplicationOptions.set("defaultZoomValue", "page-fit");
 PDFViewerApplicationOptions.set("scrollModeOnLoad", scrollModeValue);
 
 void (async () => {

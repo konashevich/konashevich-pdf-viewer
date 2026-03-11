@@ -2,7 +2,7 @@
 	"name": "konashevich-pdf-viewer",
 	"displayName": "PDF Viewer (Page Scroll)",
 	"description": "PDF.js viewer forked for Project Acacia with page-by-page scrolling enabled.",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"publisher": "konashevich",
 	"repository": {
 		"type": "git",
