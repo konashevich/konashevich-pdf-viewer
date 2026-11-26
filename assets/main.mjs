@@ -26,6 +26,15 @@ function loadConfig() {
 
 const config = loadConfig();
 
+// Printing inside the VS Code webview does not work: window.print() returns
+// immediately, so pdf.js closes its "Preparing document for printing" dialog
+// at once. Print requests (toolbar button, Ctrl+P, menu) are therefore sent to
+// the extension, which opens the PDF in the system's default PDF application
+// where printing works on Windows, Linux and macOS.
+window.print = function () {
+  window.acaciaVsCodeApi?.postMessage({ print: true });
+};
+
 // Map scroll mode names to PDF.js ScrollMode enum values
 const ScrollMode = {
   vertical: 0,

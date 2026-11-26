@@ -13348,6 +13348,7 @@ const PDFViewerApplication = {
     pdfRenderingQueue.onIdle = this._cleanup.bind(this);
     this.pdfRenderingQueue = pdfRenderingQueue;
     const vscode = acquireVsCodeApi()
+    window.acaciaVsCodeApi = vscode;
     const pdfLinkService = new VSCodeLinkService(vscode, {
       eventBus,
       externalLinkTarget: AppOptions.get("externalLinkTarget"),

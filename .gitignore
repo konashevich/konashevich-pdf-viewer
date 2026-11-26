@@ -1,0 +1,10 @@
+# Local reference document, not part of the repository
+/IVVIA White paper v.1 (AU).pdf
+
+# Build output
+*.vsix
+/VSIX/
+node_modules/
+
+# Local secrets
+.env

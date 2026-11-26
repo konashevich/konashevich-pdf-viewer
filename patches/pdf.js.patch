@@ -2,12 +2,13 @@ diff --git a/web/viewer.mjs b/web/viewer.mjs
 index c3d794a..9df6c47 100644
 --- a/web/viewer.mjs
 +++ b/web/viewer.mjs
-@@ -13347,7 +13347,8 @@ const PDFViewerApplication = {
+@@ -13347,7 +13347,9 @@ const PDFViewerApplication = {
      const pdfRenderingQueue = new PDFRenderingQueue();
      pdfRenderingQueue.onIdle = this._cleanup.bind(this);
      this.pdfRenderingQueue = pdfRenderingQueue;
 -    const pdfLinkService = new PDFLinkService({
 +    const vscode = acquireVsCodeApi()
++    window.acaciaVsCodeApi = vscode;
 +    const pdfLinkService = new VSCodeLinkService(vscode, {
        eventBus,
        externalLinkTarget: AppOptions.get("externalLinkTarget"),

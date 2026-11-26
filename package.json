@@ -1,13 +1,17 @@
 {
 	"name": "konashevich-pdf-viewer",
 	"displayName": "PDF Viewer (Page Scroll)",
-	"description": "PDF.js viewer forked for Project Acacia with page-by-page scrolling enabled.",
-	"version": "1.0.1",
-	"publisher": "konashevich",
+	"description": "PDF viewer based on PDF.js with page-by-page scrolling, Page Fit by default, a Dual Page Mode action, and printing through the system print dialog.",
+	"version": "1.0.2",
+	"publisher": "oleksiiko",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/konashevich/Public-VS-Private"
+		"url": "https://github.com/konashevich/konashevich-pdf-viewer.git"
 	},
+	"bugs": {
+		"url": "https://github.com/konashevich/konashevich-pdf-viewer/issues"
+	},
+	"homepage": "https://github.com/konashevich/konashevich-pdf-viewer#readme",
 	"engines": {
 		"vscode": "^1.96.0"
 	},
@@ -15,7 +19,11 @@
 	"license": "Apache-2.0",
 	"keywords": [
 		"pdf",
-		"viewer"
+		"viewer",
+		"pdf.js",
+		"page scroll",
+		"dual page",
+		"print"
 	],
 	"categories": [
 		"Visualization",
@@ -29,7 +37,7 @@
 		"customEditors": [
 			{
 				"viewType": "konashevich.pdf.view",
-				"displayName": "Acacia PDF View",
+				"displayName": "PDF Viewer (Page Scroll)",
 				"selector": [
 					{
 						"filenamePattern": "*.pdf"
@@ -39,7 +47,7 @@
 		],
 		"configuration": {
 			"type": "object",
-			"title": "Acacia PDF Viewer",
+			"title": "PDF Viewer (Page Scroll)",
 			"properties": {
 				"acaciaPdf.scrollMode": {
 					"type": "string",
@@ -56,28 +64,14 @@
 						"Wrapped scrolling",
 						"Page-by-page scrolling (discrete pages)"
 					],
-					"description": "Default scroll mode for PDF viewer"
+					"description": "Default scroll mode for the PDF viewer."
 				}
 			}
 		}
 	},
 	"scripts": {
-		"build": "webpack",
-		"watch": "webpack --watch",
-		"package": "webpack --mode production --devtool hidden-source-map",
-		"vsix": "npx -y @vscode/vsce package",
-		"test-compile": "npm run compile",
-		"test-watch": "npm run watch"
-	},
-	"devDependencies": {
-		"@types/node": "22.x",
-		"@types/vscode": "1.96.0",
-		"ts-loader": "9.5.2",
-		"typescript": "5.7.3",
-		"webpack": "5.97.1",
-		"webpack-cli": "6.0.1"
-	},
-	"__metadata": {
-		"note": "Local fork packaged for Project Acacia"
+		"package": "vsce package --no-dependencies",
+		"publish:vsce": "vsce publish --no-dependencies",
+		"publish:ovsx": "ovsx publish --no-dependencies"
 	}
 }

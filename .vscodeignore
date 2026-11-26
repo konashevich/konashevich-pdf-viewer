@@ -1,41 +1,14 @@
-# Exclude source files and development tools
+# Repository and tooling
 .git/**
 .github/**
-.gitmodules
 .gitignore
-
-# Development tools
 tools/**
 patches/**
+pdfjs_version.txt
 node_modules/**
 
-# Build artifacts not needed in package
+# Build output and local files
 *.vsix
-pdfjs_version.txt
-
-# TypeScript source (we only need compiled JS)
-src/**
-*.ts
-tsconfig.json
-webpack.config.js
-
-# Development files
-.vscode/**
-.eslintrc*
-.prettierrc*
-
-# Documentation (keep README and CHANGELOG)
-# README.md - keep
-# CHANGELOG.md - keep
-
-# Test files
-test/**
-*.test.js
-*.spec.js
-
-# Source maps (optional - remove if you don't need debugging)
-# *.map
-
-# Backup files
+VSIX/**
 *.backup
-dist/*.backup
+*.pdf
