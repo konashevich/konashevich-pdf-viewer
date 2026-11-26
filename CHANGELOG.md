@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed the Print button. The "Preparing document for printing" dialog closed at once and nothing was printed, because printing does not work inside an editor webview. The Print button, `Ctrl+P` and the menu entry now open the system print dialog through an installed Chrome, Edge, Brave or Chromium.
 - Changed the Marketplace publisher to `oleksiiko`. This is the first release on the Visual Studio Marketplace and Open VSX.
 - Renamed the settings and Open With titles to "PDF Viewer (Page Scroll)". The setting key `acaciaPdf.scrollMode` is unchanged.
+- Replaced the extension icon with an original one. The previous icon was the Adobe Acrobat logo and the Marketplace rejected it.
 - Rewrote the README. Removed obsolete upstream automation, backup files and unused build scripts.
 
 ## [1.0.1]
